@@ -1,0 +1,55 @@
+<mat-sidenav-container class="shell">
+  <mat-sidenav mode="side" opened class="sidenav">
+    <div class="brand">
+      <mat-icon>school</mat-icon>
+      <span>ClassMgr</span>
+    </div>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/dashboard" routerLinkActive="active">
+        <mat-icon matListItemIcon>dashboard</mat-icon>
+        <span matListItemTitle>Dashboard</span>
+      </a>
+      <a mat-list-item routerLink="/users" routerLinkActive="active" *ngIf="auth.hasRole('Admin')">
+        <mat-icon matListItemIcon>group</mat-icon>
+        <span matListItemTitle>Users</span>
+      </a>
+      <a mat-list-item routerLink="/classes" routerLinkActive="active">
+        <mat-icon matListItemIcon>class</mat-icon>
+        <span matListItemTitle>Classes</span>
+      </a>
+      <a mat-list-item routerLink="/enrollments" routerLinkActive="active" *ngIf="auth.hasRole('Admin','Teacher')">
+        <mat-icon matListItemIcon>how_to_reg</mat-icon>
+        <span matListItemTitle>Enrollments</span>
+      </a>
+      <a mat-list-item routerLink="/attendance" routerLinkActive="active">
+        <mat-icon matListItemIcon>event_available</mat-icon>
+        <span matListItemTitle>Attendance</span>
+      </a>
+      <a mat-list-item routerLink="/marks" routerLinkActive="active">
+        <mat-icon matListItemIcon>grading</mat-icon>
+        <span matListItemTitle>Marks</span>
+      </a>
+      <a mat-list-item routerLink="/insights" routerLinkActive="active" *ngIf="auth.hasRole('Admin','Teacher')">
+        <mat-icon matListItemIcon>psychology</mat-icon>
+        <span matListItemTitle>AI Insights</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="topbar">
+      <span class="page-title">Private Class Management</span>
+      <span class="spacer"></span>
+      <span class="user-chip" *ngIf="auth.user() as u">
+        {{ u.fullName }} · {{ u.role }}
+      </span>
+      <button mat-button (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        Logout
+      </button>
+    </mat-toolbar>
+    <main class="content">
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

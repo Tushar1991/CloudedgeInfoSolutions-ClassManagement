@@ -1,0 +1,40 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$cm-primary: mat.define-palette(mat.$blue-grey-palette, 800, 600, 900);
+$cm-accent: mat.define-palette(mat.$cyan-palette, 700);
+$cm-warn: mat.define-palette(mat.$red-palette);
+
+$cm-theme: mat.define-light-theme((
+  color: (
+    primary: $cm-primary,
+    accent: $cm-accent,
+    warn: $cm-warn
+  ),
+  typography: mat.define-typography-config(
+    $font-family: '"Source Sans 3", "Segoe UI", sans-serif'
+  ),
+  density: 0
+));
+
+@include mat.all-component-themes($cm-theme);
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: 'Source Sans 3', 'Segoe UI', sans-serif;
+  color: #1c2b39;
+  background: #e8eef5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1, h2, h3 {
+  font-family: 'Source Serif 4', Georgia, serif;
+}

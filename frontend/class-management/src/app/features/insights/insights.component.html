@@ -1,0 +1,63 @@
+<section class="page">
+  <h1>Auto Attendance Insight</h1>
+  <p class="sub">AI analysis predicts low-attendance students and suggests interventions.</p>
+
+  <mat-card>
+    <mat-card-content class="controls">
+      <form [formGroup]="form" (ngSubmit)="analyze()" class="filter">
+        <mat-form-field appearance="outline">
+          <mat-label>Class (optional)</mat-label>
+          <mat-select formControlName="classId">
+            <mat-option value="">All my classes</mat-option>
+            <mat-option *ngFor="let c of classes" [value]="c.id">{{ c.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-flat-button color="primary" type="submit" [disabled]="loading">
+          <mat-icon>psychology</mat-icon>
+          Run AI Analysis
+        </button>
+      </form>
+      <mat-spinner diameter="28" *ngIf="loading"></mat-spinner>
+      <p class="err" *ngIf="error">{{ error }}</p>
+    </mat-card-content>
+  </mat-card>
+
+  <div *ngIf="insight as i" class="results">
+    <mat-card class="summary">
+      <mat-card-content>
+        <h2>Summary</h2>
+        <p>{{ i.summary }}</p>
+        <div class="metrics">
+          <div><strong>{{ i.classAverageAttendancePercent }}%</strong><span>Avg attendance</span></div>
+          <div><strong>{{ i.totalStudentsAnalyzed }}</strong><span>Students analyzed</span></div>
+          <div><strong>{{ i.atRiskCount }}</strong><span>At risk</span></div>
+        </div>
+        <p class="generated">Generated {{ i.generatedAt | date: 'medium' }}</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-content>
+        <h2>Suggestions</h2>
+        <ul>
+          <li *ngFor="let s of i.suggestions">{{ s }}</li>
+        </ul>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card *ngIf="i.atRiskStudents.length">
+      <mat-card-content>
+        <h2>At-risk students</h2>
+        <article class="risk" *ngFor="let s of i.atRiskStudents" [ngClass]="s.riskLevel.toLowerCase()">
+          <header>
+            <strong>{{ s.studentName }}</strong>
+            <span class="badge">{{ s.riskLevel }} · {{ s.attendancePercent }}%</span>
+          </header>
+          <p>{{ s.warning }}</p>
+          <p class="suggest"><mat-icon>lightbulb</mat-icon> {{ s.suggestion }}</p>
+          <small>{{ s.className }} · {{ s.presentCount }}/{{ s.totalSessions }} present</small>
+        </article>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</section>

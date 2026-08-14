@@ -1,0 +1,40 @@
+<section class="dash">
+  <header>
+    <h1>Welcome, {{ auth.user()?.fullName }}</h1>
+    <p>Role: {{ auth.user()?.role }} — manage your classes from one place.</p>
+  </header>
+
+  <div class="stats">
+    <article>
+      <mat-icon>class</mat-icon>
+      <div>
+        <strong>{{ classCount }}</strong>
+        <span>Classes</span>
+      </div>
+    </article>
+    <article>
+      <mat-icon>how_to_reg</mat-icon>
+      <div>
+        <strong>{{ enrollmentCount }}</strong>
+        <span>Enrollments</span>
+      </div>
+    </article>
+    <article>
+      <mat-icon>grading</mat-icon>
+      <div>
+        <strong>{{ markCount }}</strong>
+        <span>Marks</span>
+      </div>
+    </article>
+  </div>
+
+  <div class="actions">
+    <a mat-stroked-button routerLink="/classes">View Classes</a>
+    <a mat-stroked-button routerLink="/attendance">Attendance</a>
+    <a mat-stroked-button routerLink="/marks">Marks</a>
+    <a mat-flat-button color="primary" routerLink="/insights" *ngIf="auth.hasRole('Admin','Teacher')">
+      <mat-icon>psychology</mat-icon>
+      AI Attendance Insights
+    </a>
+  </div>
+</section>

@@ -1,0 +1,29 @@
+# Visual Studio / VS Code
+.vs/
+.vscode/
+*.user
+*.suo
+
+# .NET build output
+bin/
+obj/
+
+# Logs
+*.log
+
+# Test results
+TestResults/
+
+# Node / Frontend
+node_modules/
+dist/
+.angular/
+
+# Environment / secrets
+.env
+.env.*
+secrets.json
+
+# OS files
+.DS_Store
+Thumbs.db

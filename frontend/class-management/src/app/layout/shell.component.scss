@@ -1,0 +1,71 @@
+.shell {
+  height: 100vh;
+}
+
+.sidenav {
+  width: 240px;
+  background: #0f2a44;
+  color: #e8eef5;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1.25rem 1rem;
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.brand mat-icon {
+  color: #7eb8da;
+}
+
+.sidenav a {
+  color: #d7e3ef !important;
+}
+
+.sidenav a.active {
+  background: rgba(126, 184, 218, 0.18);
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.user-chip {
+  margin-right: 0.75rem;
+  font-size: 0.9rem;
+  opacity: 0.95;
+}
+
+.content {
+  padding: 1.5rem;
+  min-height: calc(100vh - 64px);
+  background:
+    radial-gradient(circle at top right, rgba(126, 184, 218, 0.18), transparent 40%),
+    linear-gradient(160deg, #f4f7fb 0%, #e8eef5 55%, #dfe8f2 100%);
+}
+
+.page-title {
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 768px) {
+  .sidenav {
+    width: 200px;
+  }
+
+  .content {
+    padding: 1rem;
+  }
+}
